@@ -145,7 +145,7 @@ div {
    
          <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
-           <form if="productForm"> 
+           <form id="productForm" action="add_product" method="post" enctype="multipart/form-data"> 
             <div id="">
                 <div class="row">
                     <div class="col-md-12">
@@ -176,12 +176,12 @@ div {
 					 <div class="col-md-3 col-sm-6 col-xs-6">           
 			<div class="form-group">
 			<label>Company Name</label>
-			<select name="city" class="form-control">
+			<select name="brand" class="form-control">
 			<option value=""> Select Company</option>
 			<?php if($brand){
 			   foreach($brand as $brnd){
 			   	?>
-			 <option value="<?php echo $brnd->brandName?>"><?php echo $brnd->brandName?></option> 
+			 <option value="<?php echo $brnd->brandId?>"><?php echo $brnd->brandName?></option> 
 			  <?php 
 			    }
 			}?>
@@ -242,8 +242,8 @@ div {
 			<div class="form-group">
 			<label>City</label>
 			<select name="city" id="city" class="form-control">
-			<option>Sialkot</option>
-			<option>Lahore</option>
+			<option></option>
+			
 			</select>
 			</div>         
     </div>
@@ -251,12 +251,20 @@ div {
 			
 			<div class="form-group">
 			<label for="comment">Address</label>
-			<textarea class="form-control" rows="2" id="comment"></textarea>
+			<textarea class="form-control" rows="2" name="address" id="comment"></textarea>
 
 			</div>         
     </div> 
 	<hr width="100%" />
-	
+	 <div class="col-md-12 col-sm-12 col-xs-12">           
+			
+			<div class="form-group">
+			<label for="description">Description</label>
+			<textarea class="form-control" rows="2" name="description" id="description"></textarea>
+
+			</div>         
+    </div> 
+    <hr width="100%" />
 	<div class="panel panel-default">
                         <div class="panel-heading">
                            Upload Mobile Pictures
@@ -268,7 +276,7 @@ div {
 <div class="">       
 		<center>	<div id="img1">	<img  id="img" src="<?php echo base_url();?>assets/img/choos.png" /> </div>
 			<br><div class="form-group">
-			<input id="image1" type="file"  class="hidden"  />
+			<input id="image1" type="file" name="img1" class="hidden"  />
 			 <label for="image1" class="btn info">Choose</label>
 			</div>         
 			 </center>
@@ -279,7 +287,7 @@ div {
 <div class="">       
 		<center>	<div id="img2">	<img  id="img" src="<?php echo base_url();?>assets/img/choos.png" /> </div>
 			<br><div class="form-group">
-			<input id="image2" type="file"  class="hidden"  />
+			<input id="image2" type="file" name="image2"  class="hidden"  />
 			 <label for="image2" class="btn info">Choose</label>
 			</div>         
 			 </center>
@@ -290,7 +298,7 @@ div {
 <div class="">       
 		<center>	<div id="img3">	<img  id="img" src="<?php echo base_url();?>assets/img/choos.png" /> </div>
 			<br><div class="form-group">
-			<input id="image3" type="file"  class="hidden"  />
+			<input id="image3" type="file"  name="img33" class="hidden"  />
 			 <label for="image3" class="btn info">Choose</label>
 			</div>         
 			 </center>
@@ -301,7 +309,7 @@ div {
 <div class="">       
 		<center>	<div id="img4">	<img  id="img" src="<?php echo base_url();?>assets/img/choos.png" /> </div>
 			<br><div class="form-group">
-			<input id="image4" type="file"  class="hidden"  />
+			<input id="image4" type="file" name="image4"  class="hidden"  />
 			 <label for="image4" class="btn info">Choose</label>
 			</div>         
 			 </center>
@@ -312,7 +320,7 @@ div {
 <div class="">       
 		<center>	<div id="img5">	<img  id="img" src="<?php echo base_url();?>assets/img/choos.png" /> </div>
 			<br><div class="form-group">
-			<input id="image5" type="file"  class="hidden"  />
+			<input id="image5" type="file" name="img5"  class="hidden"  />
 			 <label for="image5" class="btn info">Choose</label>
 			</div>         
 			 </center>
@@ -323,7 +331,7 @@ div {
 <div class="">       
 		<center>	<div id="img6">	<img  id="img" src="<?php echo base_url();?>assets/img/choos.png" /> </div>
 			<br><div class="form-group">
-			<input id="image6" type="file"  class="hidden"  />
+			<input id="image6" type="file" name="img6"  class="hidden"  />
 			 <label for="image6" class="btn info">Choose</label>
 			</div>         
 			 </center>
@@ -335,7 +343,7 @@ div {
 <div class="">       
 		<center>	<div id="img7">	<img  id="img" src="<?php echo base_url();?>assets/img/choos.png" /> </div>
 			<br><div class="form-group">
-			<input id="image7" type="file"  class="hidden"  />
+			<input id="image7" type="file"  name="img7" class="hidden"  />
 			 <label for="image7" class="btn info">Choose</label>
 			</div>         
 			 </center>
@@ -357,29 +365,23 @@ div {
 <div class="panel-body">	
 	<div class="col-md-6 col-sm-6 col-xs-6">
 	<label for="comment"></label>   <br>        
-			<label class="checkbox-inline"><input type="checkbox"   ng-model="new_panel" id="waranty" >Waranty</label>
-			<label class="checkbox-inline"><input type="checkbox"   id="faultT"  ng-model="fault_panel" > fault</label>   
-			<label class="checkbox-inline"><input type="checkbox"   id="no"  ng-model="no_want_fault"> no waranty/fault</label>   
+			<label class="checkbox-inline"><input type="checkbox"  name="waranty" value="waranty" ng-model="new_panel" id="waranty" >Waranty</label>
+			<label class="checkbox-inline"><input type="checkbox"  name="fault" id="faultT"  ng-model="fault_panel" > fault</label>   
+			<label class="checkbox-inline"><input type="checkbox"  name="no_w_f"  id="no"  ng-model="no_want_fault"> no waranty/fault</label>   
     </div> 
 	
 </div>
 </div>
 <div class="panel-footer"></div>
-
-
 </div>
 </div>
 <!-- New Mobile -->
- 
 <div class="row" id="new_panel" style=" background-color: white;"  ng-show="new_panel">
 				  <div class="panel panel-default">
                         <div class="panel-heading">
                           Waranty Mobile:
                         </div>
                 </div>  
-
-				   
-
 	<div class="col-md-6 col-sm-6 col-xs-6">           
 			<div class="form-group">
 			<label>Waranty</label><br>
@@ -392,7 +394,7 @@ div {
 <div class="">       
 		<center>	<div id="wanty_image1">	<img  id="img" src="<?php echo base_url();?>assets/img/choos.png" /> </div>
 			<br><div class="form-group">
-			<input id="wanty_image" type="file"  class="hidden"  />
+			<input id="wanty_image" type="file" name="wanty_image" class="hidden"  />
 			 <label for="wanty_image" class="btn info">Warranty Card Picture</label>
 			</div>         
 			 </center>
@@ -416,13 +418,18 @@ div {
 			<?php if($faults){
 			      foreach($faults as $flt){   
 			?>
-			<label class="checkbox-inline"><input type="checkbox"   name="fault" value="<?php echo $flt->faultName; ?>"><?php echo $flt->faultName; ?></label>
+			<label class="checkbox-inline"><input type="checkbox"   name="fault_check[]" value="<?php echo $flt->faultId; ?>"><?php echo $flt->faultName; ?></label>
 		<?php 
 			      }
 			      }
 			      ?>
 			
     </div> 
+         </div>
+         <div class="col-md-6 col-md-offset-5">
+          <div class="form-group">
+             <input type="submit" class="btn btn-primary btn-lg" name="submit" />
+          </div>
          </div>    
 </form>
 </div>

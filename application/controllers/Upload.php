@@ -10,6 +10,12 @@ class Upload extends CI_Controller{
 		$this->load->view('upload_form',array('error'=>''));
 	}
 	public function do_upload(){
+		$images = $_FILES['userfile']['name'];
+		for($i=0;$i< count($images); $i++){
+			echo $_FILES['userfile']['name'][$i];
+				
+		}
+				/*
 		$config['upload_path']="./uploads/";
 		$config['allowed_types']='gif|jpg|png|jpeg';
 		$config['max_size']="10000";
@@ -23,7 +29,7 @@ class Upload extends CI_Controller{
 		else{
 			$data=array('upload_data'=>$this->upload->data());
 			$this->load->view('upload_success',$data);
-		}
+		}*/
 	}
 	
 }

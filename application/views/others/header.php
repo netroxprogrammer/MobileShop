@@ -54,7 +54,7 @@ font-size: 16px;"> <a href="#" class="btn btn-danger square-btn-adjust">Logout</
                         <a class="active-menu"  href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                     </li>
                      <li>
-                        <a  href="admin/addproduct"><i class="fa fa-desktop fa-3x"></i> Add Product</a>
+                        <a  href="admin/addproduct_view"><i class="fa fa-desktop fa-3x"></i> Add Product</a>
                     </li>
                     <li>
                         <a  href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>
